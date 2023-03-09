@@ -16,8 +16,8 @@
 
     - name: copying the site file to web root directory
       copy:
-        source: files/
-        destination: /var/www/html/
+        src: files/
+        dest: /var/www/html/
         owner: root
         group: root
         mode: 0644
