@@ -1,23 +1,20 @@
----
 - hosts: all
   become: true
   tasks:
-    - name: update repository index and install nginx package
+    - name: install nginx package and start nginx service
       tags: nginx
       package:
         name: nginx
         state: latest
-      when: ansible_distribution in ["Ubuntu", "CentOS"]
-
-    - name: start service nginx, if not started
       service:
         name: nginx
         state: started
+      when: ansible_distribution in ["Ubuntu", "CentOS"]
 
-    - name: copying the site file to web root directory
+    - name: copy site file to web root directory
       copy:
         src: files/
-        dest: /var/www/html/
+        dest: "{{ '/var/www/html/' if ansible_distribution == 'Ubuntu' else '/usr/share/nginx/html/' }}"
         owner: root
         group: root
         mode: 0644
