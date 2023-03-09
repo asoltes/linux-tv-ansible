@@ -3,6 +3,7 @@
   become: true
   tasks:
     - name: update repository index and install nginx package
+      tags: nginx
       package:
         name: nginx
         state: latest
@@ -12,3 +13,11 @@
       service:
         name: nginx
         state: started
+
+    - name: copying the site file to web root directory
+      copy:
+        source: files/
+        destination: /var/www/html/
+        owner: root
+        group: root
+        mode: 0644
