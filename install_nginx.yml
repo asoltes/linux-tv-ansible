@@ -1,29 +1,12 @@
 ---
-
 - hosts: all
   become: true
   tasks:
-    - name: update repository index for ubuntu
-      apt:
-        update_cache: yes
-      when: ansible_distribution == "Ubuntu"
-
-    - name: update repository index for centos
-      yum:
-        update_cache: yes
-      when: ansible_distribution == "CentOS"
-
-    - name: install nginx package for ubuntu
-      apt:
+    - name: update repository index and install nginx package
+      package:
         name: nginx
         state: latest
-      when: ansible_distribution == "Ubuntu"
-
-    - name: install nginx package for centos
-      dnf:
-        name: nginx
-        state: latest
-      when: ansible_distribution == "CentOS"
+      when: ansible_distribution in ["Ubuntu", "CentOS"]
 
     - name: start service nginx, if not started
       service:
