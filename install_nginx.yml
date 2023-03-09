@@ -2,10 +2,11 @@
   become: true
   tasks:
     - name: install nginx package and start nginx service
-      tags: nginx
       package:
         name: nginx
         state: latest
+
+    -name: starting the nginx service
       service:
         name: nginx
         state: started
