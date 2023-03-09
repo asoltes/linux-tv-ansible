@@ -11,4 +11,8 @@
       apt:
         name: nginx
         state: latest
-        started: yes
+
+    - name: start service nginx, if not started
+      service:
+        name: nginx
+        state: started
