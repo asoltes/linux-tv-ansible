@@ -10,7 +10,6 @@
     - name: starting the nginx service
       service:
         name: nginx
-        enabled: yes
         state: started
       when: ansible_distribution in ["Ubuntu", "CentOS"]
 
