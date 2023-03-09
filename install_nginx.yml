@@ -7,7 +7,7 @@
         name: nginx
         state: latest
 
-    -name: starting the nginx service
+    - name: starting the nginx service
       service:
         name: nginx
         state: started
